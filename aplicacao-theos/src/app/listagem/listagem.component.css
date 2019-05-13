@@ -1,0 +1,12 @@
+.bt-images {
+  text-align: center;
+}
+
+.bt-images>img {
+  cursor: pointer;
+  width: 50%;
+}
+
+.error {
+  color: red;
+}

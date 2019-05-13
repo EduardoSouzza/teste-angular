@@ -1,0 +1,21 @@
+.bg {
+  background-color: #1165a3 !important;
+}
+
+.text-white {
+  color: white;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.navbar-nav>li {
+  padding: 10px;
+}
+
+.navbar-nav>.active {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}

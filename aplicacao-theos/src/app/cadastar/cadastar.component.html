@@ -1,0 +1,111 @@
+<div class="box row">
+  <div class="container">
+    <div class="col-12">
+      <span class="anchor" id="formUserEdit"></span>
+      <div class="card card-outline-secondary">
+        <div class="card-header">
+          <h3 class="mb-0">Formulário</h3>
+        </div>
+        <div class="card-body">
+          <form class="form" [formGroup]="formulario" (ngSubmit)="onSubmit()" role="form" autocomplete="off">
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Nome</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="text" formControlName="nome">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Sobrenome</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="text" formControlName="sobrenome">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Email</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="email" formControlName="email"
+                  [ngClass]="{ 'is-invalid': submitted && formCadastro.email.errors }">
+                <div *ngIf="submitted && formCadastro.email.errors">
+                  <div *ngIf="formCadastro.email.errors.required" class="error">Email é obrigatório</div>
+                  <div *ngIf="formCadastro.email.errors.email"  class="error">Deve ser um endereço de e-mail válido</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Sexo</label>
+              <div class="col-lg-9">
+                <select class="form-control" size="0" formControlName="sexo">
+                  <option value="Femenino">Femenino</option>
+                  <option value="Masculino">Masculino</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Data</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="date" formControlName="data">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Estado</label>
+              <div class="col-lg-9">
+                <select class="form-control" size="0" formControlName="estado"
+                  (change)="selectOptionState($event.target.value)">
+                  <option [value]="estado.nome" *ngFor="let estado of estados">{{estado.nome}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Cidade</label>
+              <div class="col-lg-9">
+                <select class="form-control" size="0" formControlName="cidade">
+                  <option [value]="cidade" *ngFor="let cidade of cidades">{{cidade}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Área de Formação</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="text" value="janeuser" formControlName="areaFormacao">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Profissões</label>
+              <div class="col-lg-9">
+                <select class="form-control" size="0" formControlName="profissao">
+                  <option [value]="p" *ngFor="let p of profissoes">{{p}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"></label>
+              <div class="col-lg-9">
+                <button class="btn btn-primary float-right">Salvar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="popupCadastrou"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title sucesso" id="popupEditar">Sucesso!!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h4>Seu cadastro foi realizado!!</h4>
+      </div>
+      <div class="form-group modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>

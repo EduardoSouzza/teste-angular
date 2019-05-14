@@ -1,6 +1,5 @@
 "use strict";
 const Usuario_1 = require("./../model/Usuario");
-const fs = require('fs');
 class UsuarioCtrl {
     static findAll(req, res, next) {
         Usuario_1.default.findAll()

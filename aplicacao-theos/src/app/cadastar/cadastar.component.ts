@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AppSettingsService } from '../services/appSettings.service';
+import { Router } from '@angular/router';
 
 declare var jQuery;
 
 @Component({
   selector: 'app-cadastar',
   templateUrl: './cadastar.component.html',
-  styleUrls: ['./cadastar.component.css']
+  styleUrls: ['./cadastar.component.less']
 })
 
 export class CadastarComponent {
@@ -18,7 +19,7 @@ export class CadastarComponent {
   estados = [];
   cidades = [];
 
-  constructor(private appSettings: AppSettingsService, private formBuilder: FormBuilder) {
+  constructor(private appSettings: AppSettingsService, private formBuilder: FormBuilder, private router: Router) {
 
     this.formulario = this.formBuilder.group({
       nome: ['', Validators.required],
@@ -34,11 +35,13 @@ export class CadastarComponent {
 
     //get profissoes
     this.appSettings.getProfissoesJSON().subscribe(res => {
+      this.appSettings.stopLoader();
       this.profissoes = res.profissoes;
     });
 
     //get Estados
     this.appSettings.getLocationJSON().subscribe(res => {
+      this.appSettings.stopLoader();
       res.estados.forEach(loc => {
         this.estados.push(loc);
       });
@@ -52,7 +55,7 @@ export class CadastarComponent {
     (<FormControl>this.formulario.controls['cidade']).setValue(this.cidades[0]);
   }
 
-  
+
   get formCadastro() { return this.formulario.controls; }
 
   onSubmit() {
@@ -63,9 +66,14 @@ export class CadastarComponent {
       return;
     } else {
       this.appSettings.createUsuario(this.formulario.value).subscribe(res => {
+        this.appSettings.stopLoader();
         jQuery("#modalCadastro").modal("show");
       });
     }
+  }
+
+  goListagem() {
+    this.router.navigate(["/listagem"]);
   }
 
 }

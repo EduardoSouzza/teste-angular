@@ -1,11 +1,6 @@
-import { IUsuarioMaster, UsuarioModel } from './../model/definitions/Usuario';
 import Usuario from './../model/Usuario';
 
-const fs = require('fs');
-
 class UsuarioCtrl {
-
-    static IdEstabelecimento;
 
     static findAll(req, res, next) {
         Usuario.findAll()

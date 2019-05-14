@@ -9,12 +9,14 @@ import { AppRoutingModule } from './/app-routing.module';
 import { ListagemComponent } from './listagem/listagem.component';
 import { CadastarComponent } from './cadastar/cadastar.component';
 import { RouterModule } from '@angular/router';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListagemComponent,
     CadastarComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

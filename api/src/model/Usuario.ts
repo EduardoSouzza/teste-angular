@@ -1,6 +1,3 @@
-import * as mongoose from 'mongoose';
-import * as async from 'async';
-
 import {
     UsuarioModel,
     IUsuarioMaster,

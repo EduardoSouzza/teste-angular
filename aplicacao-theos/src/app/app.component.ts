@@ -7,7 +7,7 @@ declare var jQuery;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.less']
 })
 export class AppComponent {
   title = 'app';
@@ -35,11 +35,13 @@ export class AppComponent {
 
     //get profissoes
     this.appSettings.getProfissoesJSON().subscribe(res => {
+      this.appSettings.stopLoader();
       this.profissoes = res.profissoes;
     });
 
     //get Estados
     this.appSettings.getLocationJSON().subscribe(res => {
+      this.appSettings.stopLoader();
       res.estados.forEach(loc => {
         this.estados.push(loc);
       });

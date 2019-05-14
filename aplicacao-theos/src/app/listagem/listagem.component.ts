@@ -8,7 +8,7 @@ declare var jQuery;
 @Component({
   selector: 'app-listagem',
   templateUrl: './listagem.component.html',
-  styleUrls: ['./listagem.component.css']
+  styleUrls: ['./listagem.component.less']
 })
 export class ListagemComponent implements OnInit {
 
@@ -41,11 +41,13 @@ export class ListagemComponent implements OnInit {
 
     //get profissoes
     this.appSettings.getProfissoesJSON().subscribe(res => {
+      this.appSettings.stopLoader();
       this.profissoes = res.profissoes;
     });
 
     //get Estados
     this.appSettings.getLocationJSON().subscribe(res => {
+      this.appSettings.stopLoader();
       res.estados.forEach(loc => {
         this.estados.push(loc);
       });
@@ -62,6 +64,7 @@ export class ListagemComponent implements OnInit {
   getUsuarios() {
     this.usuarios = [];
     this.appSettings.getUsuario().subscribe(res => {
+      this.appSettings.stopLoader();
       res.forEach(element => {
         this.usuarios.push(element);
       });
@@ -71,9 +74,10 @@ export class ListagemComponent implements OnInit {
   getUsuario(usuario) {
     this.usuario = usuario;
   }
-  
+
   deletar() {
     this.appSettings.deleteUsuario(this.usuario._id).subscribe(res => {
+      this.appSettings.stopLoader();
       jQuery(".modal").modal("hide");
       this.getUsuarios();
     });
@@ -88,6 +92,7 @@ export class ListagemComponent implements OnInit {
     }
 
     this.appSettings.findUsuario(texto).subscribe(res => {
+      this.appSettings.stopLoader();
       if (res.length > 0) {
         this.usuarios = [];
         res.forEach(element => {
@@ -114,7 +119,7 @@ export class ListagemComponent implements OnInit {
     (<FormControl>this.formulario.controls['sexo']).setValue(usuario.sexo);
     (<FormControl>this.formulario.controls['areaFormacao']).setValue(usuario.areaFormacao);
     (<FormControl>this.formulario.controls['profissao']).setValue(usuario.profissao);
-    (<FormControl>this.formulario.controls['data']).setValue(new Date(usuario.createdon).toISOString().substring(0,10));
+    (<FormControl>this.formulario.controls['data']).setValue(new Date(usuario.createdon).toISOString().substring(0, 10));
   }
 
 
@@ -127,6 +132,7 @@ export class ListagemComponent implements OnInit {
     } else {
       this.appSettings.updateUsuario(this.formulario.value).subscribe(res => {
         jQuery(".modal").modal("hide");
+        this.appSettings.stopLoader();
         this.getUsuarios();
       });
     }

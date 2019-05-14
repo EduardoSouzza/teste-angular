@@ -10,8 +10,6 @@ import * as routes from './routes/api';
 
 var app = express();
 
-// socket.default.init(app);
-
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
